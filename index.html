@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedro Martins · CV</title>
+<style>
+  :root{
+    --bg:#0b0f17;
+    --bg-soft:#111726;
+    --card:#141b2c;
+    --line:#1f2940;
+    --txt:#e6ebf5;
+    --muted:#8b97b0;
+    --accent:#5eead4;     /* teal */
+    --accent-2:#7c9cff;   /* indigo */
+    --chip:#1a2236;
+    --mono:"SFMono-Regular",ui-monospace,"JetBrains Mono",Consolas,Menlo,monospace;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:
+      radial-gradient(1200px 600px at 80% -10%,rgba(124,156,255,.12),transparent 60%),
+      radial-gradient(900px 500px at -10% 10%,rgba(94,234,212,.10),transparent 55%),
+      var(--bg);
+    color:var(--txt);font-family:var(--sans);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 80px}
+
+  /* top bar */
+  .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px}
+  .brand{font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.5px}
+  .brand b{color:var(--accent)}
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--bg-soft)}
+  .toggle button{
+    appearance:none;border:0;background:transparent;color:var(--muted);
+    font-family:var(--mono);font-size:12px;padding:7px 14px;cursor:pointer;transition:.18s
+  }
+  .toggle button.active{background:var(--accent);color:#05201b;font-weight:600}
+
+  /* hero */
+  .hero{
+    background:linear-gradient(180deg,var(--card),var(--bg-soft));
+    border:1px solid var(--line);border-radius:18px;padding:34px 30px;
+    display:flex;gap:26px;align-items:center;flex-wrap:wrap;position:relative;overflow:hidden
+  }
+  .hero::after{content:"";position:absolute;inset:0;background:
+    radial-gradient(400px 200px at 90% 0,rgba(124,156,255,.18),transparent 70%);pointer-events:none}
+  .herotext{position:relative;z-index:1;flex:1 1 0;min-width:0}
+  .hero h1{margin:0;font-size:30px;letter-spacing:-.5px}
+  .role{color:var(--accent);font-family:var(--mono);font-size:14px;margin-top:4px}
+  .tagline{color:var(--muted);margin-top:10px;max-width:520px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .meta a,.meta span{
+    font-family:var(--mono);font-size:12.5px;color:var(--muted);
+    border:1px solid var(--line);background:var(--bg-soft);padding:6px 11px;border-radius:8px;transition:.18s
+  }
+  .meta a:hover{border-color:var(--accent);color:var(--txt)}
+
+  /* sections */
+  section{margin-top:40px}
+  .h{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .h h2{margin:0;font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:600}
+  .h .num{font-family:var(--mono);font-size:12px;color:var(--accent)}
+  .h .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+  /* timeline */
+  .item{
+    border:1px solid var(--line);background:var(--card);border-radius:14px;
+    padding:20px 22px;margin-bottom:14px;transition:.2s;position:relative
+  }
+  .item:hover{border-color:var(--accent-2);transform:translateY(-2px)}
+  .item .top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+  .item h3{margin:0;font-size:17px}
+  .item .co{color:var(--accent-2);font-weight:600}
+  .item .when{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+  .item .where{
+    display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:7px
+  }
+  .item .where .co{font-family:var(--sans);font-size:14px}
+  .item .where .place{white-space:nowrap;margin-left:auto}
+  .item .tag{
+    font-family:var(--mono);font-size:10.5px;font-weight:400;text-transform:uppercase;letter-spacing:.8px;
+    color:var(--accent);background:var(--chip);border:1px solid var(--line);
+    padding:2px 7px;border-radius:6px;vertical-align:middle;margin-left:4px
+  }
+  .item .via{color:var(--accent-2)}
+  .item p{margin:10px 0 0;color:var(--muted);font-size:14.5px}
+  .item ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px}
+  .item li{margin:3px 0}
+
+  /* skills */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .skillcard{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}
+  .skillcard h4{margin:0 0 12px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:var(--mono);font-size:12px;background:var(--chip);border:1px solid var(--line);color:var(--txt);padding:5px 10px;border-radius:7px}
+  .chip.acad{border-style:dashed;border-color:#33415e;color:var(--muted)}
+  .chip .ac{color:var(--accent-2);font-weight:700;font-size:10px;margin-left:1px;vertical-align:super;line-height:0}
+  .legend{margin:16px 0 0;color:var(--muted);font-family:var(--mono);font-size:11.5px;line-height:1.5}
+  .legend b{color:var(--accent-2);font-weight:700}
+
+  /* two col */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.two{grid-template-columns:1fr}.hero{padding:26px 20px}.hero h1{font-size:25px}}
+
+  footer{margin-top:60px;text-align:center;color:var(--muted);font-family:var(--mono);font-size:12px}
+  .printbtn{cursor:pointer}
+
+  @media print{
+    body{background:#fff;color:#111}
+    .bar,.toggle,footer{display:none}
+    .item,.skillcard,.hero{border-color:#ddd;background:#fff;box-shadow:none}
+    .role,.chip,.h .num,.item .co,.item .tag,.item .via,.chip .ac,.legend b{color:#111 !important}
+    .chip.acad{color:#555 !important;border-color:#bbb}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <div class="brand">&lt;<b>cv</b>/&gt; pedro-martins · 2026</div>
+    <div class="toggle" role="group" aria-label="language">
+      <button id="btn-pt" class="active" onclick="setLang('pt')">PT</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="herotext">
+      <h1>Pedro Martins</h1>
+      <div class="role" data-pt="Senior Software Engineer" data-en="Senior Software Engineer">Senior Software Engineer</div>
+      <p class="tagline"
+         data-pt="Especializado em backend e sistemas distribuídos — integração entre sistemas, bases de dados e arquiteturas escaláveis."
+         data-en="Specialized in backend and distributed systems — system integration, databases and scalable architectures.">
+      </p>
+      <div class="meta">
+        <a href="mailto:pmds.martins@outlook.pt">✉ pmds.martins@outlook.pt</a>
+        <span>📍 <span data-pt="Lisboa, Portugal" data-en="Lisbon, Portugal">Lisboa, Portugal</span></span>
+        <a href="https://www.linkedin.com/in/pmds-martins/" target="_blank" rel="noopener">in linkedin.com/in/pmds-martins</a>
+        <span class="printbtn" onclick="window.print()">🖨 <span data-pt="Imprimir / PDF" data-en="Print / PDF">Imprimir / PDF</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="h"><span class="num">01</span><h2 data-pt="Sobre" data-en="About">Sobre</h2><span class="rule"></span></div>
+    <div class="item">
+      <p data-pt="Faço software em Java há mais de 11 anos. Comecei como estagiário na Novabase, a mexer em smart meters, e desde então passei por prestações sociais do Estado, pela framework de um produto internacional de MRO para aviação, pelas integrações dos Jogos da Santa Casa e pela modernização dos seus sistemas legacy. Hoje ando pelos seguros de saúde, na Future Healthcare, a trabalhar em Quarkus. Boa parte do percurso foi em consultoria, o que me habituou a entrar em contextos novos, apanhar o negócio depressa e começar a entregar sem grandes aquecimentos."
+         data-en="I have been building software in Java for over 11 years. I started as an intern at Novabase working on smart meters, and since then I have worked on state social benefits, the framework of an international aviation MRO product, the integrations behind Jogos da Santa Casa and the modernization of its legacy systems. These days I am in health insurance at Future Healthcare, working with Quarkus. Much of the journey happened through consultancy, which got me used to landing in a new context, picking up the business quickly and delivering without a long warm-up."></p>
+      <p data-pt="Sou extrovertido e é com pessoas que funciono melhor — foi por isso que gostei tanto de liderar equipas de desenvolvimento. Distribuir trabalho, discutir decisões técnicas em conjunto e ver a equipa a crescer dá-me mais satisfação do que qualquer código que escreva sozinho."
+         data-en="I am an extrovert and I work best around people — which is exactly why I enjoyed leading development teams so much. Splitting up the work, thrashing out technical decisions together and watching a team grow gives me more satisfaction than any code I write on my own."></p>
+      <p data-pt="Fora do ecrã, música sempre a tocar: é o que me marca o ritmo do dia de trabalho. E gosto de desportos radicais — quando o tempo e as ondas ajudam, faço bodyboard."
+         data-en="Away from the screen, there is always music playing: it is what sets the rhythm of my working day. I am also into extreme sports — when the weather and the waves cooperate, I am out bodyboarding."></p>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section>
+    <div class="h"><span class="num">02</span><h2 data-pt="Experiência" data-en="Experience">Experiência</h2><span class="rule"></span></div>
+
+    <div class="item">
+      <div class="top">
+        <h3 data-pt="Senior Software Engineer" data-en="Senior Software Engineer">Senior Software Engineer</h3>
+        <span class="when" data-pt="mai 2026 — Presente" data-en="May 2026 — Present">mai 2026 — Presente</span>
+      </div>
+      <div class="where"><span class="co">Future Healthcare</span><span class="tag" data-pt="cliente" data-en="client">cliente</span> · <span class="via" data-pt="via GROWMATE" data-en="via GROWMATE">via GROWMATE</span><span class="place" data-pt="Lisboa, Portugal · Híbrido" data-en="Lisbon, Portugal · Hybrid">Lisboa, Portugal · Híbrido</span></div>
+      <ul>
+        <li data-pt="Desenvolvimento de serviços backend em Quarkus." data-en="Backend service development with Quarkus."></li>
+        <li data-pt="Desenvolvimento de sistemas escaláveis." data-en="Development of scalable systems."></li>
+        <li data-pt="Utilização de ferramentas de IA (Claude Code) no ciclo de desenvolvimento." data-en="Using AI tooling (Claude Code) in the development cycle."></li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="top">
+        <h3 data-pt="Team Leader &amp; Senior Software Engineer" data-en="Team Leader &amp; Senior Software Engineer">Team Leader &amp; Senior Software Engineer</h3>
+        <span class="when" data-pt="jan 2024 — abr 2026 · 2 anos 4 meses" data-en="Jan 2024 — Apr 2026 · 2 yrs 4 mos">jan 2024 — abr 2026 · 2 anos 4 meses</span>
+      </div>
+      <div class="where"><span class="co">Santa Casa da Misericórdia de Lisboa</span><span class="tag" data-pt="cliente" data-en="client">cliente</span> · <span class="via" data-pt="via LINDIT" data-en="via LINDIT">via LINDIT</span><span class="place" data-pt="Lisboa, Portugal · Remoto" data-en="Lisbon, Portugal · Remote">Lisboa, Portugal · Remoto</span></div>
+      <ul>
+        <li data-pt="Modernização tecnológica dos sistemas legacy do cliente." data-en="Technology modernization of the client's legacy systems."></li>
+        <li data-pt="Liderança técnica da equipa de desenvolvimento." data-en="Technical leadership of the development team."></li>
+        <li data-pt="Distribuição de tarefas pela equipa." data-en="Task allocation across the team."></li>
+        <li data-pt="Decisão tecnológica e definição de requisitos técnicos." data-en="Technology decisions and definition of technical requirements."></li>
+        <li data-pt="Desenvolvimento de serviços backend em Java e Spring Boot." data-en="Backend service development with Java and Spring Boot."></li>
+        <li data-pt="Automação de builds e pipelines com Jenkins." data-en="Build and pipeline automation with Jenkins."></li>
+        <li data-pt="Desenvolvimento de documentação técnica." data-en="Authoring of technical documentation."></li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="top">
+        <h3 data-pt="Senior Software Developer" data-en="Senior Software Developer">Senior Software Developer</h3>
+        <span class="when" data-pt="out 2020 — jan 2024 · 3 anos 4 meses" data-en="Oct 2020 — Jan 2024 · 3 yrs 4 mos">out 2020 — jan 2024 · 3 anos 4 meses</span>
+      </div>
+      <div class="where"><span class="co">Swiss Aviation Software</span><span class="tag" data-pt="cliente" data-en="client">cliente</span> · <span class="via" data-pt="via Connect Digital" data-en="via Connect Digital">via Connect Digital</span><span class="place" data-pt="Lisboa, Portugal · Remoto" data-en="Lisbon, Portugal · Remote">Lisboa, Portugal · Remoto</span></div>
+      <ul>
+        <li data-pt="Desenvolvimento e manutenção da framework de um produto internacional de MRO para aviação." data-en="Developed and maintained the framework of an international MRO product for aviation."></li>
+        <li data-pt="Especificação técnica, desenvolvimento e documentação de novas funcionalidades e alterações a funcionalidades existentes, destacando-se a assinatura digital de PDF." data-en="Technically specified, developed and documented new functionalities and changes to existing ones — the PDF digital signature feature stands out."></li>
+        <li data-pt="Migração e atualização completa de versões de bibliotecas de terceiros." data-en="Fully migrated and upgraded third-party library versions."></li>
+        <li data-pt="Desenvolvimento de jobs e pipelines de CI/CD transversais a toda a empresa." data-en="Built CI/CD jobs and pipelines used across the entire company."></li>
+        <li data-pt="Participação desde o início no projeto de modernização do produto, desenvolvendo a framework para novas aplicações em código cross-platform (Web, Android, iOS e Desktop)." data-en="Took part from the start in the product modernization project, developing the framework for new applications in cross-platform code (Web, Android, iOS and Desktop)."></li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="top">
+        <h3 data-pt="Software Developer &amp; Team Leader" data-en="Software Developer &amp; Team Leader">Software Developer &amp; Team Leader</h3>
+        <span class="when" data-pt="mar 2017 — set 2020 · 3 anos 7 meses" data-en="Mar 2017 — Sep 2020 · 3 yrs 7 mos">mar 2017 — set 2020 · 3 anos 7 meses</span>
+      </div>
+      <div class="where"><span class="co">Instituto Informática, I.P.</span><span class="tag" data-pt="cliente" data-en="client">cliente</span> · <span class="via" data-pt="via Connect Digital" data-en="via Connect Digital">via Connect Digital</span><span class="place" data-pt="Lisboa, Portugal · No local" data-en="Lisbon Area, Portugal · On-site">Lisboa, Portugal · No local</span></div>
+      <ul>
+        <li data-pt="Desenho funcional e desenvolvimento de duas prestações sociais: Prestação Social para a Inclusão (apoio a pessoas com deficiência) e Subsídio de Apoio ao Cuidador Informal." data-en="Functional design and development of two social benefits: Prestação Social para a Inclusão (support for people with disabilities) and Subsídio de Apoio ao Cuidador Informal (support for informal caregivers)."></li>
+        <li data-pt="Liderança da equipa de desenvolvimento em ambos os projetos." data-en="Led the development team on both projects."></li>
+        <li data-pt="Participação ativa na modelação de dados e no desenvolvimento de todos os processos associados: registo do requerimento online, análise de pré-requisitos e aprovação, gestão do ciclo de vida e cálculo e pagamento do valor da prestação." data-en="Actively took part in data modeling and in the development of all related processes: online application registration, prerequisite analysis and approval, life-cycle management, and calculation and payment of the benefit amount."></li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="top">
+        <h3 data-pt="Software Developer" data-en="Software Developer">Software Developer</h3>
+        <span class="when" data-pt="fev 2019 — nov 2019 · 10 meses" data-en="Feb 2019 — Nov 2019 · 10 mos">fev 2019 — nov 2019 · 10 meses</span>
+      </div>
+      <div class="where"><span class="co">Santa Casa da Misericórdia de Lisboa</span><span class="tag" data-pt="cliente" data-en="client">cliente</span> · <span class="via" data-pt="via Connect Digital" data-en="via Connect Digital">via Connect Digital</span><span class="place" data-pt="Lisboa, Portugal · No local" data-en="Lisbon, Portugal · On-site">Lisboa, Portugal · No local</span></div>
+      <ul>
+        <li data-pt="Desenho, documentação e implementação de APIs na camada de integração dos Jogos da Santa Casa da Misericórdia de Lisboa, com MuleSoft." data-en="Designed, documented and implemented API experiences on the integration layer of Jogos da Santa Casa da Misericórdia de Lisboa, using MuleSoft."></li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="top">
+        <h3 data-pt="Software Developer" data-en="Software Developer">Software Developer</h3>
+        <span class="when" data-pt="mar 2015 — mar 2017 · 2 anos 1 mês" data-en="Mar 2015 — Mar 2017 · 2 yrs 1 mo">mar 2015 — mar 2017 · 2 anos 1 mês</span>
+      </div>
+      <div class="where"><span class="co">Novabase</span><span class="place" data-pt="Lisboa · Presencial" data-en="Lisbon · On-site">Lisboa · Presencial</span></div>
+      <ul>
+        <li data-pt="Desenvolvimento de software de gestão e controlo de Smart Meters." data-en="Developed management and control software for Smart Meters."></li>
+        <li data-pt="Desenvolvimento de um sistema de gestão comercial (energia)." data-en="Developed a commercial management system (energy)."></li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="top">
+        <h3 data-pt="Software Developer (Estagiário)" data-en="Software Developer (Internship)">Software Developer (Estagiário)</h3>
+        <span class="when" data-pt="set 2014 — mar 2015 · 7 meses" data-en="Sep 2014 — Mar 2015 · 7 mos">set 2014 — mar 2015 · 7 meses</span>
+      </div>
+      <div class="where"><span class="co">Novabase</span><span class="place" data-pt="Lisboa, Portugal · Presencial" data-en="Lisbon, Portugal · On-site">Lisboa, Portugal · Presencial</span></div>
+      <ul>
+        <li data-pt="Desenvolvimento de software de gestão e controlo de Smart Meters." data-en="Developed management and control software for Smart Meters."></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="h"><span class="num">03</span><h2 data-pt="Competências" data-en="Skills">Competências</h2><span class="rule"></span></div>
+    <div class="grid">
+      <div class="skillcard">
+        <h4 data-pt="Linguagens" data-en="Languages">Linguagens</h4>
+        <div class="chips">
+          <span class="chip">Java</span><span class="chip">SQL</span><span class="chip">JavaScript</span>
+          <span class="chip">HTML</span><span class="chip">Markdown</span>
+          <span class="chip acad">C<sup class="ac">*</sup></span><span class="chip acad">C#<sup class="ac">*</sup></span>
+        </div>
+      </div>
+      <div class="skillcard">
+        <h4 data-pt="Frameworks &amp; Plataformas" data-en="Frameworks &amp; Platforms">Frameworks &amp; Plataformas</h4>
+        <div class="chips">
+          <span class="chip">Quarkus</span><span class="chip">Spring Boot</span><span class="chip">Java EE</span>
+          <span class="chip">PrimeFaces</span><span class="chip">Angular</span><span class="chip">MuleSoft</span><span class="chip">Apache Maven</span>
+          <span class="chip acad">.NET Core<sup class="ac">*</sup></span><span class="chip acad">WCF<sup class="ac">*</sup></span><span class="chip acad">React<sup class="ac">*</sup></span>
+        </div>
+      </div>
+      <div class="skillcard">
+        <h4 data-pt="Bases de Dados" data-en="Databases">Bases de Dados</h4>
+        <div class="chips">
+          <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Oracle Database</span>
+          <span class="chip">MongoDB</span><span class="chip">Redis</span>
+          <span class="chip acad">SQLServer<sup class="ac">*</sup></span>
+        </div>
+      </div>
+      <div class="skillcard">
+        <h4 data-pt="Mensageria &amp; Infra" data-en="Messaging &amp; Infra">Mensageria &amp; Infra</h4>
+        <div class="chips">
+          <span class="chip">ActiveMQ</span><span class="chip">RabbitMQ</span>
+          <span class="chip">Docker</span><span class="chip">Kubernetes</span>
+          <span class="chip">Jenkins</span><span class="chip">CI/CD</span>
+          <span class="chip acad">Pentaho<sup class="ac">*</sup></span><span class="chip acad">Data Warehouse<sup class="ac">*</sup></span>
+        </div>
+      </div>
+      <div class="skillcard">
+        <h4 data-pt="Arquitetura" data-en="Architecture">Arquitetura</h4>
+        <div class="chips">
+          <span class="chip">REST APIs</span><span class="chip" data-pt="Sistemas Distribuídos" data-en="Distributed Systems">Sistemas Distribuídos</span>
+          <span class="chip" data-pt="Programação Reativa" data-en="Reactive Programming">Programação Reativa</span>
+          <span class="chip" data-pt="POO" data-en="OOP">POO</span><span class="chip" data-pt="Modelação de Dados" data-en="Data Modeling">Modelação de Dados</span><span class="chip">Cross-platform</span>
+          <span class="chip acad"><span data-pt="Geração de Código" data-en="Code Generation">Geração de Código</span><sup class="ac">*</sup></span>
+        </div>
+      </div>
+      <div class="skillcard">
+        <h4 data-pt="Práticas &amp; Ferramentas" data-en="Practices &amp; Tools">Práticas &amp; Ferramentas</h4>
+        <div class="chips">
+          <span class="chip" data-pt="Liderança de Equipa" data-en="Team Leadership">Liderança de Equipa</span>
+          <span class="chip" data-pt="Especificação Técnica" data-en="Technical Specification">Especificação Técnica</span>
+          <span class="chip" data-pt="Documentação" data-en="Documentation">Documentação</span>
+          <span class="chip" data-pt="Desenho Funcional" data-en="Functional Design">Desenho Funcional</span>
+          <span class="chip">Jira</span><span class="chip">Confluence</span><span class="chip">Claude Code</span>
+        </div>
+      </div>
+    </div>
+    <p class="legend"><b>*</b> <span data-pt="Apenas em contexto académico (formação no ISEL, Universidade Nova de Lisboa e ensino secundário), sem experiência profissional." data-en="Academic context only (studies at ISEL, Universidade Nova de Lisboa and secondary school), with no professional experience.">Apenas em contexto académico (formação no ISEL, Universidade Nova de Lisboa e ensino secundário), sem experiência profissional.</span></p>
+  </section>
+
+  <!-- EDUCATION + LANGUAGES -->
+  <section>
+    <div class="h"><span class="num">04</span><h2 data-pt="Formação &amp; Idiomas" data-en="Education &amp; Languages">Formação &amp; Idiomas</h2><span class="rule"></span></div>
+    <div class="two">
+      <div class="item">
+        <div class="top">
+          <h3 data-pt="Pós-Graduação em Eng. Informática e de Computadores" data-en="Postgraduate in Computer and Software Engineering">Pós-Graduação em Eng. Informática e de Computadores</h3>
+          <span class="when">2017 — 2019</span>
+        </div>
+        <p data-pt="ISEL — Instituto Superior de Engenharia de Lisboa" data-en="ISEL — Lisbon School of Engineering">ISEL — Instituto Superior de Engenharia de Lisboa</p>
+        <p data-pt="Plano curricular: Computação Distribuída; Engenharia de Software; Cibersegurança; Aprendizagem e Mineração de Dados; Inteligência Artificial e Sistemas Cognitivos; Economia e Gestão de Projecto; Infraestruturas de Sistemas Distribuídos; Arquiteturas Avançadas de Computação; Computação de Dados em Larga Escala; Representação e Processamento de Conhecimento; Programação Web." data-en="Curriculum: Distributed Computing; Software Engineering; Cybersecurity; Machine Learning and Data Mining; Artificial Intelligence and Cognitive Systems; Economics and Project Management; Distributed Systems Infrastructures; Advanced Computing Architectures; Large-Scale Data Computing; Knowledge Representation and Processing; Web Programming."></p>
+      </div>
+      <div class="item">
+        <div class="top">
+          <h3 data-pt="Licenciatura em Engenharia Informática" data-en="BSc in Computer Engineering">Licenciatura em Engenharia Informática</h3>
+          <span class="when">2011 — 2015</span>
+        </div>
+        <p data-pt="Universidade Nova de Lisboa" data-en="Universidade Nova de Lisboa">Universidade Nova de Lisboa</p>
+        <p data-pt="Plano curricular: Álgebra Linear e Geometria Analítica; Cálculo I; Competências Transversais para Ciências e Tecnologia; Introdução à Programação; Sistemas Lógicos; Arquitetura de Computadores; Cálculo II; Matemática Discreta; Programação Orientada pelos Objetos; Algoritmos e Estruturas de Dados; Física; Fundamentos de Sistemas de Operação; Lógica Computacional; Análise e Desenho de Algoritmos; Atividade de Desenvolvimento Curricular; Sistemas Distribuídos; Computação Gráfica e Interfaces; Engenharia de Software; Inteligência Artificial; Redes de Computadores; Bases de Dados; Linguagens e Ambientes de Programação; Probabilidades e Estatística D; Sociedade, Sustentabilidade e Transformação Digital; Teoria da Computação." data-en="Curriculum: Linear Algebra and Analytic Geometry; Calculus I; Transversal Skills for Science and Technology; Introduction to Programming; Logic Systems; Computer Architecture; Calculus II; Discrete Mathematics; Object-Oriented Programming; Algorithms and Data Structures; Physics; Operating Systems Fundamentals; Computational Logic; Algorithm Analysis and Design; Curricular Development Activity; Distributed Systems; Computer Graphics and Interfaces; Software Engineering; Artificial Intelligence; Computer Networks; Databases; Programming Languages and Environments; Probability and Statistics D; Society, Sustainability and Digital Transformation; Theory of Computation."></p>
+      </div>
+      <div class="item">
+        <div class="top">
+          <h3 data-pt="Curso Tecnológico de Gestão e Programação de Sistemas Informáticos" data-en="Technological Course in IT Systems Management and Programming">Curso Tecnológico de Gestão e Programação de Sistemas Informáticos</h3>
+          <span class="when">2008 — 2011</span>
+        </div>
+        <p data-pt="Escola Secundária de Odivelas" data-en="Escola Secundária de Odivelas">Escola Secundária de Odivelas</p>      </div>
+      <div class="item">
+        <div class="top"><h3 data-pt="Idiomas" data-en="Languages">Idiomas</h3></div>
+        <p><span data-pt="Português — Nativo" data-en="Portuguese — Native">Português — Nativo</span><br>
+           <span data-pt="Inglês — Profissional" data-en="English — Professional">Inglês — Profissional</span></p>
+      </div>
+      <div class="item">
+        <div class="top"><h3 data-pt="Domínios de Negócio" data-en="Business Domains">Domínios de Negócio</h3></div>
+        <p><span data-pt="Seguros de Saúde" data-en="Health Insurance">Seguros de Saúde</span><br>
+           <span data-pt="Aviação (MRO)" data-en="Aviation (MRO)">Aviação (MRO)</span><br>
+           <span data-pt="Segurança Social &amp; Prestações do Estado" data-en="Social Security &amp; State Benefits">Segurança Social &amp; Prestações do Estado</span><br>
+           <span data-pt="Jogos &amp; Lotarias" data-en="Gaming &amp; Lotteries">Jogos &amp; Lotarias</span><br>
+           <span data-pt="Energia &amp; Smart Metering" data-en="Energy &amp; Smart Metering">Energia &amp; Smart Metering</span></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span data-pt="Feito com HTML &amp; CSS · © 2026 Pedro Martins" data-en="Built with HTML &amp; CSS · © 2026 Pedro Martins">Feito com HTML &amp; CSS · © 2026 Pedro Martins</span>
+  </footer>
+
+</div>
+
+<script>
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-'+lang+']').forEach(function(el){
+      el.textContent = el.getAttribute('data-'+lang);
+    });
+    document.getElementById('btn-pt').classList.toggle('active', lang==='pt');
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  }
+  setLang('pt');
+</script>
+</body>
+</html>
