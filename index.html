@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pedro Martins · CV</title>
+<meta name="description" content="Pedro Martins — Senior Software Engineer. Backend e sistemas distribuídos: integração entre sistemas, bases de dados e arquiteturas escaláveis.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0f17'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='bold' fill='%235eead4' text-anchor='middle'%3EPM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
   :root{
     --bg:#0b0f17;
@@ -55,7 +60,7 @@
 
   /* top bar */
   .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px}
-  .controls{display:flex;align-items:center;gap:10px}
+  .controls{display:flex;align-items:stretch;gap:10px}
   .brand{font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.5px}
   .brand b{color:var(--accent)}
   .toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--bg-soft)}
@@ -64,7 +69,8 @@
     font-family:var(--mono);font-size:12px;padding:7px 14px;cursor:pointer;transition:.18s
   }
   .toggle button.active{background:var(--accent);color:var(--on-accent);font-weight:600}
-  .toggle button.icon{font-size:13px;padding:6px 12px;line-height:1.3}
+  .toggle button.icon{padding:7px 12px}
+  .toggle button.icon .ico{display:block}
 
   /* hero */
   .hero{
@@ -79,7 +85,7 @@
   .role{color:var(--accent);font-family:var(--mono);font-size:14px;margin-top:4px}
   .tagline{color:var(--muted);margin-top:10px;max-width:520px}
   .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-  .meta > a,.meta > span{
+  .meta > a,.meta > span,.meta > button{
     font-family:var(--mono);font-size:12.5px;color:var(--muted);
     border:1px solid var(--line);background:var(--bg-soft);padding:6px 11px;border-radius:8px;transition:.18s
   }
@@ -119,7 +125,8 @@
 
   /* skills */
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-  .skillcard{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px}
+  .skillcard{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:18px;transition:.2s}
+  .skillcard:hover{border-color:var(--accent-2);transform:translateY(-2px)}
   .skillcard h4{margin:0 0 12px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--accent)}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .chip{font-family:var(--mono);font-size:12px;background:var(--chip);border:1px solid var(--line);color:var(--txt);padding:5px 10px;border-radius:7px}
@@ -137,15 +144,24 @@
   }
 
   footer{margin-top:60px;text-align:center;color:var(--muted);font-family:var(--mono);font-size:12px}
-  .printbtn{cursor:pointer}
-  .printbtn .ico{vertical-align:-2px;margin-right:1px}
+  .printbtn{cursor:pointer;appearance:none;line-height:inherit}
+  .meta .ico{vertical-align:-2px;margin-right:1px;flex:0 0 auto}
+  .meta > .printbtn:focus-visible,.meta > a:focus-visible,.toggle button:focus-visible{
+    outline:2px solid var(--accent);outline-offset:2px
+  }
 
   @media print{
-    body{background:#fff;color:#111}
-    .bar,.toggle,footer{display:none}
-    .item,.skillcard,.hero{border-color:#ddd;background:#fff;box-shadow:none}
-    .role,.chip,.h .num,.item .org,.item .client,.item .tag,.chip .ac,.legend b{color:#111 !important}
-    .chip.acad{color:#555 !important;border-color:#bbb}
+    /* redefine the tokens so printing is theme-independent */
+    :root,:root[data-theme="light"]{
+      --bg:#fff;--bg-soft:#fff;--card:#fff;--line:#d9d9d9;
+      --txt:#111;--muted:#444;
+      --accent:#0a6b60;--accent-2:#3a49a8;
+      --chip:#f4f5f7;--on-accent:#fff;--acad-line:#bbb;
+      --glow-a:transparent;--glow-b:transparent;--glow-hero:transparent;
+    }
+    .bar,footer,.printbtn{display:none}
+    .item,.skillcard,.hero{box-shadow:none}
+    .item:hover,.skillcard:hover{transform:none}
   }
 </style>
 </head>
@@ -153,11 +169,11 @@
 <div class="wrap">
 
   <div class="bar">
-    <div class="brand">&lt;<b>cv</b>/&gt; pedro-martins · 2026</div>
+    <div class="brand">&lt;<b>cv</b>/&gt; pedro-martins · <span id="yr">2026</span></div>
     <div class="controls">
       <div class="toggle" role="group" aria-label="theme">
-        <button id="btn-dark" class="icon active" onclick="setTheme('dark')" title="Modo escuro" aria-label="Modo escuro">☾</button>
-        <button id="btn-light" class="icon" onclick="setTheme('light')" title="Modo claro" aria-label="Modo claro">☀</button>
+        <button id="btn-dark" class="icon active" onclick="setTheme('dark')" title="Modo escuro" aria-label="Modo escuro"><svg class="ico" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+        <button id="btn-light" class="icon" onclick="setTheme('light')" title="Modo claro" aria-label="Modo claro"><svg class="ico" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.2v2.1M12 19.7v2.1M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2.2 12h2.1M19.7 12h2.1M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/></svg></button>
       </div>
       <div class="toggle" role="group" aria-label="language">
         <button id="btn-pt" class="active" onclick="setLang('pt')">PT</button>
@@ -176,10 +192,10 @@
          data-en="Specialized in backend and distributed systems — system integration, databases and scalable architectures.">
       </p>
       <div class="meta">
-        <a href="mailto:pmds.martins@outlook.pt">✉ pmds.martins@outlook.pt</a>
-        <span>📍 <span data-pt="Lisboa, Portugal" data-en="Lisbon, Portugal">Lisboa, Portugal</span></span>
-        <a href="https://www.linkedin.com/in/pmds-martins/" target="_blank" rel="noopener">in linkedin.com/in/pmds-martins</a>
-        <span class="printbtn" onclick="window.print()"><svg class="ico" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/></svg> <span data-pt="Imprimir / PDF" data-en="Print / PDF">Imprimir / PDF</span></span>
+        <a href="mailto:pmds.martins@outlook.pt"><svg class="ico" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m2.5 6.5 9.5 6.5 9.5-6.5"/></svg> pmds.martins@outlook.pt</a>
+        <span><svg class="ico" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6.5-8 12-8 12s-8-5.5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.8"/></svg> <span data-pt="Lisboa, Portugal" data-en="Lisbon, Portugal">Lisboa, Portugal</span></span>
+        <a href="https://www.linkedin.com/in/pmds-martins/" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 8.5a5.5 5.5 0 0 1 5.5 5.5v6.5h-4V14a1.5 1.5 0 0 0-3 0v6.5h-4V9h4v1.2a4.4 4.4 0 0 1 1.5-1.7z"/><path d="M2.8 9h3.4v11.5H2.8z"/><circle cx="4.5" cy="4.3" r="1.8"/></svg> linkedin.com/in/pmds-martins</a>
+        <button type="button" class="printbtn" onclick="window.print()"><svg class="ico" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/></svg> <span data-pt="Imprimir / PDF" data-en="Print / PDF">Imprimir / PDF</span></button>
       </div>
     </div>
   </div>
@@ -188,8 +204,8 @@
   <section>
     <div class="h"><span class="num">01</span><h2 data-pt="Sobre" data-en="About">Sobre</h2><span class="rule"></span></div>
     <div class="item">
-      <p data-pt="Faço software em Java há mais de 11 anos. Comecei como estagiário na Novabase, a mexer em smart meters, e desde então passei por prestações sociais do Estado, pela framework de um produto internacional de MRO para aviação, pelas integrações dos Jogos da Santa Casa e pela modernização dos seus sistemas legacy. Hoje ando pelos seguros de saúde, na Future Healthcare, a trabalhar em Quarkus. Boa parte do percurso foi em consultoria, o que me habituou a entrar em contextos novos, apanhar o negócio depressa e começar a entregar sem grandes aquecimentos."
-         data-en="I have been building software in Java for over 11 years. I started as an intern at Novabase working on smart meters, and since then I have worked on state social benefits, the framework of an international aviation MRO product, the integrations behind Jogos da Santa Casa and the modernization of its legacy systems. These days I am in health insurance at Future Healthcare, working with Quarkus. Much of the journey happened through consultancy, which got me used to landing in a new context, picking up the business quickly and delivering without a long warm-up."></p>
+      <p data-pt="Faço software em Java há mais de {YEARS} anos. Comecei como estagiário na Novabase, a mexer em smart meters, e desde então passei por prestações sociais do Estado, pela framework de um produto internacional de MRO para aviação, pelas integrações dos Jogos da Santa Casa e pela modernização dos seus sistemas legacy. Hoje ando pelos seguros de saúde, na Future Healthcare, a trabalhar em Quarkus. Boa parte do percurso foi em consultoria, o que me habituou a entrar em contextos novos, apanhar o negócio depressa e começar a entregar sem grandes aquecimentos."
+         data-en="I have been building software in Java for over {YEARS} years. I started as an intern at Novabase working on smart meters, and since then I have worked on state social benefits, the framework of an international aviation MRO product, the integrations behind Jogos da Santa Casa and the modernization of its legacy systems. These days I am in health insurance at Future Healthcare, working with Quarkus. Much of the journey happened through consultancy, which got me used to landing in a new context, picking up the business quickly and delivering without a long warm-up."></p>
       <p data-pt="Sou extrovertido e é com pessoas que funciono melhor — foi por isso que gostei tanto de liderar equipas de desenvolvimento. Distribuir trabalho, discutir decisões técnicas em conjunto e ver a equipa a crescer dá-me mais satisfação do que qualquer código que escreva sozinho."
          data-en="I am an extrovert and I work best around people — which is exactly why I enjoyed leading development teams so much. Splitting up the work, thrashing out technical decisions together and watching a team grow gives me more satisfaction than any code I write on my own."></p>
       <p data-pt="Fora do ecrã, música sempre a tocar: é o que me marca o ritmo do dia de trabalho. E gosto de desportos radicais — quando o tempo e as ondas ajudam, faço bodyboard."
@@ -439,28 +455,56 @@
   </section>
 
   <footer>
-    <span data-pt="© 2026 Pedro Martins" data-en="© 2026 Pedro Martins">© 2026 Pedro Martins</span>
+    <span data-pt="© {YEAR} Pedro Martins" data-en="© {YEAR} Pedro Martins">© 2026 Pedro Martins</span>
   </footer>
 
 </div>
 
 <script>
+  /* career started at Novabase in September 2014 */
+  var CAREER_START = new Date(2014, 8, 1);
+  var NOW = new Date();
+  var YEAR = NOW.getFullYear();
+  var YEARS = Math.floor((NOW - CAREER_START) / 31557600000);
+
+  function fill(text){
+    return text.replace(/\{YEARS\}/g, YEARS).replace(/\{YEAR\}/g, YEAR);
+  }
+
+  function press(id, on){
+    var el = document.getElementById(id);
+    el.classList.toggle('active', on);
+    el.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+
+  var THEME_LABELS = {
+    pt:{'btn-dark':'Modo escuro','btn-light':'Modo claro'},
+    en:{'btn-dark':'Dark mode','btn-light':'Light mode'}
+  };
+
   function setLang(lang){
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-'+lang+']').forEach(function(el){
-      el.textContent = el.getAttribute('data-'+lang);
+      el.textContent = fill(el.getAttribute('data-'+lang));
     });
-    document.getElementById('btn-pt').classList.toggle('active', lang==='pt');
-    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    Object.keys(THEME_LABELS[lang]).forEach(function(id){
+      var el = document.getElementById(id);
+      el.setAttribute('title', THEME_LABELS[lang][id]);
+      el.setAttribute('aria-label', THEME_LABELS[lang][id]);
+    });
+    press('btn-pt', lang==='pt');
+    press('btn-en', lang==='en');
   }
-  setLang('pt');
 
   function setTheme(theme){
     document.documentElement.setAttribute('data-theme', theme);
-    document.getElementById('btn-dark').classList.toggle('active', theme==='dark');
-    document.getElementById('btn-light').classList.toggle('active', theme==='light');
+    press('btn-dark', theme==='dark');
+    press('btn-light', theme==='light');
     try{ localStorage.setItem('cv-theme', theme); }catch(e){}
   }
+
+  document.getElementById('yr').textContent = YEAR;
+  setLang('pt');
   var savedTheme = 'dark';
   try{ savedTheme = localStorage.getItem('cv-theme') || 'dark'; }catch(e){}
   setTheme(savedTheme);
