@@ -135,6 +135,22 @@
   .legend{margin:16px 0 0;color:var(--muted);font-family:var(--mono);font-size:11.5px;line-height:1.5}
   .legend b{color:var(--accent-2);font-weight:700}
 
+  /* collapsible curriculum */
+  .curric{margin-top:10px}
+  .curric summary{
+    display:inline-flex;align-items:center;gap:6px;cursor:pointer;list-style:none;
+    font-family:var(--mono);font-size:12px;color:var(--accent-2)
+  }
+  .curric summary::-webkit-details-marker{display:none}
+  .curric summary:hover{color:var(--txt)}
+  .curric summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+  .curric .chev{transition:transform .18s;flex:0 0 auto}
+  .curric[open] .chev{transform:rotate(90deg)}
+  .curric p{margin-top:8px}
+  .item .curric ul.cadeiras{margin:9px 0 0;padding-left:15px;font-size:13px}
+  .item .curric ul.cadeiras li{margin:0;line-height:1.45}
+  .item .curric ul.cadeiras li::marker{color:var(--accent-2)}
+
   /* two col */
   .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:640px){.two{grid-template-columns:1fr}.hero{padding:26px 20px}.hero h1{font-size:25px}}
@@ -171,6 +187,10 @@
     }
     .item:hover,.skillcard:hover{transform:none;border-color:var(--line)}
     .chips,.item .head{break-inside:avoid;page-break-inside:avoid}
+    /* curricula are force-opened by beforeprint; the chevron is a screen affordance
+       and the summary becomes a plain label on paper */
+    .curric .chev{display:none}
+    .curric summary{color:var(--muted);cursor:auto}
     li{break-inside:avoid;page-break-inside:avoid}
     p,ul{orphans:3;widows:3}
 
@@ -356,76 +376,105 @@
       <div class="skillcard">
         <h4 data-pt="Linguagens" data-en="Languages">Linguagens</h4>
         <div class="chips">
-          <span class="chip">Java</span><span class="chip">TypeScript</span><span class="chip">SQL</span>
-          <span class="chip">JavaScript</span><span class="chip">Dart</span>
-          <span class="chip acad">C<sup class="ac">*</sup></span><span class="chip acad">Python<sup class="ac">*</sup></span>
+          <span class="chip">Dart</span>
+          <span class="chip">Java</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">SQL</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip acad">C<sup class="ac">*</sup></span>
+          <span class="chip acad">Python<sup class="ac">*</sup></span>
         </div>
       </div>
       <div class="skillcard">
         <h4 data-pt="Frameworks &amp; Plataformas" data-en="Frameworks &amp; Platforms">Frameworks &amp; Plataformas</h4>
         <div class="chips">
-          <span class="chip">Quarkus</span><span class="chip">Spring Boot</span><span class="chip">Java EE</span>
-          <span class="chip">Hibernate</span><span class="chip">PrimeFaces</span>
-          <span class="chip">Angular</span><span class="chip">Flutter</span>
-          <span class="chip acad">.NET Core<sup class="ac">*</sup></span><span class="chip acad">React<sup class="ac">*</sup></span>
+          <span class="chip">Angular</span>
+          <span class="chip">Flutter</span>
+          <span class="chip">Hibernate</span>
+          <span class="chip">Java EE</span>
+          <span class="chip">PrimeFaces</span>
+          <span class="chip">Quarkus</span>
+          <span class="chip">Spring Boot</span>
+          <span class="chip acad">.NET Core<sup class="ac">*</sup></span>
+          <span class="chip acad">React<sup class="ac">*</sup></span>
         </div>
       </div>
       <div class="skillcard">
         <h4 data-pt="Integração &amp; Mensageria" data-en="Integration &amp; Messaging">Integração &amp; Mensageria</h4>
         <div class="chips">
-          <span class="chip">MuleSoft</span><span class="chip">Apache Camel</span><span class="chip">JBoss Fuse</span>
-          <span class="chip">ActiveMQ</span><span class="chip">RabbitMQ</span>
+          <span class="chip">ActiveMQ</span>
+          <span class="chip">Apache Camel</span>
+          <span class="chip">JBoss Fuse</span>
+          <span class="chip">MuleSoft</span>
+          <span class="chip">RabbitMQ</span>
         </div>
       </div>
       <div class="skillcard">
         <h4 data-pt="Dados &amp; Persistência" data-en="Data &amp; Persistence">Dados &amp; Persistência</h4>
         <div class="chips">
-          <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Oracle Database</span>
-          <span class="chip">MongoDB</span><span class="chip">Redis</span>
-          <span class="chip">Liquibase</span><span class="chip">ETL</span>
+          <span class="chip">ETL</span>
+          <span class="chip">Liquibase</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">Oracle Database</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Redis</span>
           <span class="chip acad">SQLServer<sup class="ac">*</sup></span>
         </div>
       </div>
       <div class="skillcard">
         <h4 data-pt="Runtime, Build &amp; Infra" data-en="Runtime, Build &amp; Infra">Runtime, Build &amp; Infra</h4>
         <div class="chips">
-          <span class="chip">Tomcat</span><span class="chip">WildFly</span>
-          <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">S3</span>
-          <span class="chip">Apache Maven</span><span class="chip">Jenkins</span>
+          <span class="chip">Apache Maven</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Jenkins</span>
+          <span class="chip">Kubernetes</span>
+          <span class="chip">S3</span>
+          <span class="chip">Tomcat</span>
+          <span class="chip">WildFly</span>
         </div>
       </div>
       <div class="skillcard">
         <h4 data-pt="Observabilidade" data-en="Observability">Observabilidade</h4>
         <div class="chips">
-          <span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">Micrometer</span>
+          <span class="chip">Grafana</span>
+          <span class="chip">Micrometer</span>
+          <span class="chip">Prometheus</span>
         </div>
       </div>
       <div class="skillcard">
         <h4 data-pt="Testes" data-en="Testing">Testes</h4>
         <div class="chips">
+          <span class="chip">ArchUnit</span>
+          <span class="chip">JUnit</span>
+          <span class="chip">Mockito</span>
           <span class="chip" data-pt="Test-driven development" data-en="Test-driven development">Test-driven development</span>
-          <span class="chip">JUnit</span><span class="chip">Mockito</span>
-          <span class="chip">ArchUnit</span><span class="chip">Testcontainers</span>
+          <span class="chip">Testcontainers</span>
         </div>
       </div>
       <div class="skillcard">
         <h4 data-pt="Arquitetura" data-en="Architecture">Arquitetura</h4>
         <div class="chips">
-          <span class="chip">REST APIs</span><span class="chip">WebSockets &amp; SSE</span><span class="chip">OpenAPI</span>
-          <span class="chip" data-pt="Sistemas Distribuídos" data-en="Distributed Systems">Sistemas Distribuídos</span>
-          <span class="chip" data-pt="Programação Reativa" data-en="Reactive Programming">Programação Reativa</span>
-          <span class="chip">Event-Driven</span>
           <span class="chip" data-pt="Domain-driven design" data-en="Domain-driven design">Domain-driven design</span>
-          <span class="chip" data-pt="Segurança Web" data-en="Web Security">Segurança Web</span>
+          <span class="chip">Event-Driven</span>
           <span class="chip" data-pt="Modelação de Dados" data-en="Data Modeling">Modelação de Dados</span>
+          <span class="chip">OpenAPI</span>
+          <span class="chip" data-pt="Programação Reativa" data-en="Reactive Programming">Programação Reativa</span>
+          <span class="chip">REST APIs</span>
+          <span class="chip" data-pt="Segurança Web" data-en="Web Security">Segurança Web</span>
+          <span class="chip" data-pt="Sistemas Distribuídos" data-en="Distributed Systems">Sistemas Distribuídos</span>
+          <span class="chip">WebSockets &amp; SSE</span>
         </div>
       </div>
       <div class="skillcard">
         <h4 data-pt="Métodos &amp; Práticas" data-en="Methods &amp; Practices">Métodos &amp; Práticas</h4>
         <div class="chips">
-          <span class="chip">Agile</span><span class="chip">Scrum</span><span class="chip">Kanban</span>
+          <span class="chip">Agile</span>
+          <span class="chip">Claude Code</span>
+          <span class="chip">Code Review</span>
+          <span class="chip">Kanban</span>
           <span class="chip" data-pt="Liderança de Equipa" data-en="Team Leadership">Liderança de Equipa</span>
-          <span class="chip">Code Review</span><span class="chip">Claude Code</span>
+          <span class="chip">Scrum</span>
         </div>
       </div>
     </div>
@@ -437,11 +486,11 @@
     <div class="h"><span class="num">04</span><h2 data-pt="Domínios de Negócio" data-en="Business Domains">Domínios de Negócio</h2><span class="rule"></span></div>
     <div class="item">
       <div class="chips">
-        <span class="chip" data-pt="Seguros de Saúde" data-en="Health Insurance">Seguros de Saúde</span>
         <span class="chip" data-pt="Aviação (MRO)" data-en="Aviation (MRO)">Aviação (MRO)</span>
-        <span class="chip" data-pt="Segurança Social &amp; Prestações do Estado" data-en="Social Security &amp; State Benefits">Segurança Social &amp; Prestações do Estado</span>
-        <span class="chip" data-pt="Jogos &amp; Lotarias" data-en="Gaming &amp; Lotteries">Jogos &amp; Lotarias</span>
         <span class="chip" data-pt="Energia &amp; Smart Metering" data-en="Energy &amp; Smart Metering">Energia &amp; Smart Metering</span>
+        <span class="chip" data-pt="Jogos &amp; Lotarias" data-en="Gaming &amp; Lotteries">Jogos &amp; Lotarias</span>
+        <span class="chip" data-pt="Segurança Social &amp; Prestações do Estado" data-en="Social Security &amp; State Benefits">Segurança Social &amp; Prestações do Estado</span>
+        <span class="chip" data-pt="Seguros de Saúde" data-en="Health Insurance">Seguros de Saúde</span>
       </div>
     </div>
   </section>
@@ -456,7 +505,22 @@
           <span class="when">2017 — 2019</span>
         </div>
         <p data-pt="ISEL — Instituto Superior de Engenharia de Lisboa" data-en="ISEL — Lisbon School of Engineering">ISEL — Instituto Superior de Engenharia de Lisboa</p>
-        <p data-pt="Plano curricular: Computação Distribuída; Engenharia de Software; Cibersegurança; Aprendizagem e Mineração de Dados; Inteligência Artificial e Sistemas Cognitivos; Economia e Gestão de Projecto; Infraestruturas de Sistemas Distribuídos; Arquiteturas Avançadas de Computação; Computação de Dados em Larga Escala; Representação e Processamento de Conhecimento; Programação Web." data-en="Curriculum: Distributed Computing; Software Engineering; Cybersecurity; Machine Learning and Data Mining; Artificial Intelligence and Cognitive Systems; Economics and Project Management; Distributed Systems Infrastructures; Advanced Computing Architectures; Large-Scale Data Computing; Knowledge Representation and Processing; Web Programming."></p>
+        <details class="curric">
+          <summary><svg class="chev" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg><span data-pt="Plano curricular" data-en="Curriculum">Plano curricular</span></summary>
+          <ul class="cadeiras">
+            <li data-pt="Aprendizagem e Mineração de Dados" data-en="Machine Learning and Data Mining"></li>
+            <li data-pt="Arquiteturas Avançadas de Computação" data-en="Advanced Computing Architectures"></li>
+            <li data-pt="Cibersegurança" data-en="Cybersecurity"></li>
+            <li data-pt="Computação de Dados em Larga Escala" data-en="Large-Scale Data Computing"></li>
+            <li data-pt="Computação Distribuída" data-en="Distributed Computing"></li>
+            <li data-pt="Economia e Gestão de Projecto" data-en="Economics and Project Management"></li>
+            <li data-pt="Engenharia de Software" data-en="Software Engineering"></li>
+            <li data-pt="Infraestruturas de Sistemas Distribuídos" data-en="Distributed Systems Infrastructures"></li>
+            <li data-pt="Inteligência Artificial e Sistemas Cognitivos" data-en="Artificial Intelligence and Cognitive Systems"></li>
+            <li data-pt="Programação Web" data-en="Web Programming"></li>
+            <li data-pt="Representação e Processamento de Conhecimento" data-en="Knowledge Representation and Processing"></li>
+          </ul>
+        </details>
       </div>
       <div class="item">
         <div class="top">
@@ -464,7 +528,34 @@
           <span class="when">2011 — 2015</span>
         </div>
         <p data-pt="Universidade Nova de Lisboa" data-en="Universidade Nova de Lisboa">Universidade Nova de Lisboa</p>
-        <p data-pt="Plano curricular: Álgebra Linear e Geometria Analítica; Cálculo I; Competências Transversais para Ciências e Tecnologia; Introdução à Programação; Sistemas Lógicos; Arquitetura de Computadores; Cálculo II; Matemática Discreta; Programação Orientada pelos Objetos; Algoritmos e Estruturas de Dados; Física; Fundamentos de Sistemas de Operação; Lógica Computacional; Análise e Desenho de Algoritmos; Atividade de Desenvolvimento Curricular; Sistemas Distribuídos; Computação Gráfica e Interfaces; Engenharia de Software; Inteligência Artificial; Redes de Computadores; Bases de Dados; Linguagens e Ambientes de Programação; Probabilidades e Estatística D; Sociedade, Sustentabilidade e Transformação Digital; Teoria da Computação." data-en="Curriculum: Linear Algebra and Analytic Geometry; Calculus I; Transversal Skills for Science and Technology; Introduction to Programming; Logic Systems; Computer Architecture; Calculus II; Discrete Mathematics; Object-Oriented Programming; Algorithms and Data Structures; Physics; Operating Systems Fundamentals; Computational Logic; Algorithm Analysis and Design; Curricular Development Activity; Distributed Systems; Computer Graphics and Interfaces; Software Engineering; Artificial Intelligence; Computer Networks; Databases; Programming Languages and Environments; Probability and Statistics D; Society, Sustainability and Digital Transformation; Theory of Computation."></p>
+        <details class="curric">
+          <summary><svg class="chev" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg><span data-pt="Plano curricular" data-en="Curriculum">Plano curricular</span></summary>
+          <ul class="cadeiras">
+            <li data-pt="Álgebra Linear e Geometria Analítica" data-en="Linear Algebra and Analytic Geometry"></li>
+            <li data-pt="Algoritmos e Estruturas de Dados" data-en="Algorithms and Data Structures"></li>
+            <li data-pt="Análise e Desenho de Algoritmos" data-en="Algorithm Analysis and Design"></li>
+            <li data-pt="Arquitetura de Computadores" data-en="Computer Architecture"></li>
+            <li data-pt="Atividade de Desenvolvimento Curricular" data-en="Curricular Development Activity"></li>
+            <li data-pt="Bases de Dados" data-en="Databases"></li>
+            <li data-pt="Cálculo I e II" data-en="Calculus I and II"></li>
+            <li data-pt="Competências Transversais para Ciências e Tecnologia" data-en="Transversal Skills for Science and Technology"></li>
+            <li data-pt="Computação Gráfica e Interfaces" data-en="Computer Graphics and Interfaces"></li>
+            <li data-pt="Física" data-en="Physics"></li>
+            <li data-pt="Fundamentos de Sistemas de Operação" data-en="Operating Systems Fundamentals"></li>
+            <li data-pt="Inteligência Artificial" data-en="Artificial Intelligence"></li>
+            <li data-pt="Introdução à Programação" data-en="Introduction to Programming"></li>
+            <li data-pt="Linguagens e Ambientes de Programação" data-en="Programming Languages and Environments"></li>
+            <li data-pt="Lógica Computacional" data-en="Computational Logic"></li>
+            <li data-pt="Matemática Discreta" data-en="Discrete Mathematics"></li>
+            <li data-pt="Probabilidades e Estatística" data-en="Probability and Statistics"></li>
+            <li data-pt="Programação Orientada pelos Objetos" data-en="Object-Oriented Programming"></li>
+            <li data-pt="Redes de Computadores" data-en="Computer Networks"></li>
+            <li data-pt="Sistemas Distribuídos" data-en="Distributed Systems"></li>
+            <li data-pt="Sistemas Lógicos" data-en="Logic Systems"></li>
+            <li data-pt="Sociedade, Sustentabilidade e Transformação Digital" data-en="Society, Sustainability and Digital Transformation"></li>
+            <li data-pt="Teoria da Computação" data-en="Theory of Computation"></li>
+          </ul>
+        </details>
       </div>
       <div class="item">
         <div class="top">
@@ -508,11 +599,36 @@
     en:{'btn-dark':'Dark mode','btn-light':'Light mode'}
   };
 
+  /* alphabetical order differs per language ("Álgebra Linear" vs "Linear Algebra"),
+     so re-sort after every language switch. Academic chips stay last. */
+  function sortKey(el){
+    return el.textContent.replace(/\*/g,'').trim();
+  }
+  function reorder(box, extra){
+    Array.prototype.slice.call(box.children).sort(extra).forEach(function(node){
+      box.appendChild(node);
+    });
+  }
+  function sortLocalized(lang){
+    var byName = function(a,b){
+      return sortKey(a).localeCompare(sortKey(b), lang, {sensitivity:'base'});
+    };
+    document.querySelectorAll('ul.cadeiras').forEach(function(ul){ reorder(ul, byName); });
+    document.querySelectorAll('.chips').forEach(function(box){
+      reorder(box, function(a,b){
+        var aAcad = a.classList.contains('acad'), bAcad = b.classList.contains('acad');
+        if(aAcad !== bAcad) return aAcad ? 1 : -1;
+        return byName(a,b);
+      });
+    });
+  }
+
   function setLang(lang){
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-'+lang+']').forEach(function(el){
       el.textContent = fill(el.getAttribute('data-'+lang));
     });
+    sortLocalized(lang);
     Object.keys(THEME_LABELS[lang]).forEach(function(id){
       var el = document.getElementById(id);
       el.setAttribute('title', THEME_LABELS[lang][id]);
@@ -528,6 +644,18 @@
     press('btn-light', theme==='light');
     try{ localStorage.setItem('cv-theme', theme); }catch(e){}
   }
+
+  /* the PDF is a filed-away artifact: print the curricula in full,
+     then restore whatever the reader had open on screen */
+  function eachCurric(fn){
+    Array.prototype.forEach.call(document.querySelectorAll('details.curric'), fn);
+  }
+  window.addEventListener('beforeprint', function(){
+    eachCurric(function(d){ d.dataset.wasOpen = d.open ? '1' : '0'; d.open = true; });
+  });
+  window.addEventListener('afterprint', function(){
+    eachCurric(function(d){ d.open = d.dataset.wasOpen === '1'; delete d.dataset.wasOpen; });
+  });
 
   document.getElementById('yr').textContent = YEAR;
   setLang('pt');
