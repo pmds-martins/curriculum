@@ -159,9 +159,35 @@
       --chip:#f4f5f7;--on-accent:#fff;--acad-line:#bbb;
       --glow-a:transparent;--glow-b:transparent;--glow-hero:transparent;
     }
+    @page{margin:14mm}
+    html{scroll-behavior:auto}
     .bar,footer,.printbtn{display:none}
-    .item,.skillcard,.hero{box-shadow:none}
-    .item:hover,.skillcard:hover{transform:none}
+    .wrap{max-width:none;padding:0}
+
+    /* never split a card across pages */
+    .item,.skillcard,.hero{
+      box-shadow:none;
+      break-inside:avoid;page-break-inside:avoid
+    }
+    .item:hover,.skillcard:hover{transform:none;border-color:var(--line)}
+    .chips,.item .head{break-inside:avoid;page-break-inside:avoid}
+    li{break-inside:avoid;page-break-inside:avoid}
+    p,ul{orphans:3;widows:3}
+
+    /* keep a section heading with the content it introduces */
+    section{margin-top:22px;break-before:auto}
+    .h{break-after:avoid;page-break-after:avoid}
+    .legend{break-before:avoid;page-break-before:avoid}
+
+    /* grid items honour break-inside poorly; multi-column and block do not */
+    .two{display:block}
+    .grid{display:block;columns:2;column-gap:14px}
+
+    /* tighter vertical rhythm on paper */
+    .item{margin-bottom:10px;padding:14px 16px}
+    .skillcard{padding:14px 16px;margin-bottom:10px}
+    .hero{padding:20px 22px}
+    .item ul{margin-top:8px}
   }
 </style>
 </head>
